@@ -26,6 +26,7 @@ app.get('/gh/:repo', async (req, res) => {
       return res.redirect(302, `https://github.com/${ghUsername}/${repo}`)
     }
 
+    // Redirect if not found
     return res.status(404).send('404')
   } catch (e) {
     console.error(e)

@@ -2,6 +2,8 @@
 
 A URL shortener using Airtable and Vercel.
 
+> CLI for the same - created by @dotangad and modified by me at https://github.com/kavin25/airtable-url-cli
+
 ## Setup
 
 1. Clone the repository and install dependencies.

@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express')
 const fetch = require('node-fetch')
 
@@ -43,7 +44,10 @@ app.get('/*', async (req, res) => {
       return res.redirect(302, target)
     }
 
-    return res.status(404).send('404')
+    //return res.status(404).send('404')
+    return res
+      .status(404)
+      .sendFile(path.join(__dirname, './public', '404.html'))
   } catch (e) {
     console.error(e)
   }

@@ -5,6 +5,12 @@ const fetch = require('node-fetch')
 const app = express()
 const { getTarget } = require('./lib/airtable')
 
+const send404Page = (response) => {
+  return response
+    .status(404)
+    .sendFile(path.join(__dirname, './public', '404.html'))
+}
+
 app.get('/', async (req, res) => {
   try {
     return res.redirect(302, process.env.MAIN_DOMAIN)
@@ -28,7 +34,8 @@ app.get('/gh/:repo', async (req, res) => {
     }
 
     // Redirect if not found
-    return res.status(404).send('404')
+    //return res.status(404).send('404')
+    send404Page(res)
   } catch (e) {
     console.error(e)
   }
@@ -45,9 +52,10 @@ app.get('/*', async (req, res) => {
     }
 
     //return res.status(404).send('404')
-    return res
-      .status(404)
-      .sendFile(path.join(__dirname, './public', '404.html'))
+    //return res
+    //.status(404)
+    //.sendFile(path.join(__dirname, './public', '404.html'))
+    send404Page(res)
   } catch (e) {
     console.error(e)
   }

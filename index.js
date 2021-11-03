@@ -1,6 +1,9 @@
 const path = require('path')
 const express = require('express')
 const fetch = require('node-fetch')
+const RSSParser = require('rss-parser')
+const cheerio = require('cheerio')
+const axios = require('axios')
 
 const app = express()
 const { getTarget } = require('./lib/airtable')
@@ -16,6 +19,41 @@ app.get('/', async (req, res) => {
     return res.redirect(302, process.env.MAIN_DOMAIN)
   } catch (e) {
     console.error(e)
+  }
+})
+
+const classToIFrameIndex = [
+  { classes: [10, 11, 12], index: 0 },
+  { classes: [8, 9], index: 1 },
+  { classes: [6, 7], index: 2 },
+]
+const FEED_URL = 'https://dpsrkp.net/category/notices/feed/'
+
+app.get('/:userClass/tt', async (req, res) => {
+  const { userClass } = req.params
+  if (
+    !classToIFrameIndex.flatMap((i) => i.classes).includes(parseInt(userClass))
+  )
+    return res.status(400).send('eg. 11/tt')
+  try {
+    const parser = new RSSParser()
+    const articleLink = (await parser.parseURL(FEED_URL)).items
+      .map(({ title, link }) => ({ title, link }))
+      .find((item) => item.title.includes('SCHEDULE')).link
+
+    const { data } = await axios.get(articleLink)
+
+    const $ = cheerio.load(data)
+
+    const { index } = classToIFrameIndex.find((obj) =>
+      obj.classes.includes(parseInt(userClass))
+    )
+
+    console.log(index)
+    const link = $('iframe')[index].attribs.src
+    res.redirect(link)
+  } catch (e) {
+    res.status(400).send(`An error occured: ${e}`)
   }
 })
 

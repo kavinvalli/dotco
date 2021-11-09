@@ -39,7 +39,10 @@ app.get('/:userClass/tt', async (req, res) => {
     const parser = new RSSParser()
     const articleLink = (await parser.parseURL(FEED_URL)).items
       .map(({ title, link }) => ({ title, link }))
-      .find((item) => item.title.includes('SCHEDULE')).link
+      .find(
+        (item) =>
+          item.title.includes('SCHEDULE') && item.title.includes('SESSION')
+      ).link
 
     const { data } = await axios.get(articleLink)
 

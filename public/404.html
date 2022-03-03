@@ -4,52 +4,71 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kavin Valli - 404 Not Found</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <style type="text/css" media="screen">
-      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
-
       * {
-        box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
-
       body {
-        font-family: 'Roboto';
-        background-color: #282a36;
-        color: #f8f8f2;
-        border-top: 2px solid #ff79c6;
-        padding: 12px 24px;
-        display: flex;
+        box-sizing: border-box;
+        font-family: Inter, 'sans-serif';
+        background-color: #000;
+        color: #fff;
+      }
+      .container {
+        width: 100%;
         height: 100vh;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+      }
+      .gradient-text {
+        background: linear-gradient(to right, #30cfd0, #c43ad6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      h1 {
+        font-size: 64px;
+      }
+      p {
+        font-size: 24px;
         text-align: center;
       }
-
-      a {
-        color: #bd93f9;
+      p a {
+        text-decoration: underline !important;
       }
-
       button {
-        margin: 8px;
-        padding: 8px;
-        border: 0px;
-        outline: none;
-        background-color: #bd93f9;
-        border-radius: 4px;
-        color: #282a36;
+        background-image: linear-gradient(
+          to right,
+          rgb(1 134 218),
+          rgb(182 49 167)
+        );
+        font-size: 18px;
+        padding: 12px 32px;
+        border: 0;
+        color: white;
+        margin: 1rem;
         cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        border-radius: 50px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Hey there!</h1>
-      Looks like you used the wrong shortlink.
-      <div>
+      <h1 class="gradient-text">Not Found</h1>
+      <p>
+        Looks like you used the wrong link.
+        <br />
         If you think, this is not right,
-        <a href="mailto:mail@kavin.me" target="_blank">contact me</a>
-      </div>
+        <a href="mailto:mail@kavin.me" target="_blank" class="gradient-text"
+          >contact me</a
+        >
+      </p>
       <a href="https://kavin.me" target="_blank"><button>My Website</button></a>
     </div>
   </body>
